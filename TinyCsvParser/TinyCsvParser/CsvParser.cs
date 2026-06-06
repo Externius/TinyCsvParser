@@ -39,7 +39,7 @@ public class CsvParser<TEntity> where TEntity : class, new()
 
     public async IAsyncEnumerable<CsvMappingResult<TEntity>> ReadFromFileAsync(string filePath, [EnumeratorCancellation] CancellationToken ct = default)
     {
-        using FileStream stream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+        await using FileStream stream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
         await foreach (CsvMappingResult<TEntity> result in ReadAsync(stream, ct).ConfigureAwait(false))
         {
@@ -59,7 +59,7 @@ public class CsvParser<TEntity> where TEntity : class, new()
 
     public async IAsyncEnumerable<CsvMappingResult<TEntity>> ReadFromStringAsync(string csvContent, [EnumeratorCancellation] CancellationToken ct = default)
     {
-        using MemoryStream stream = new(_encoding.GetBytes(csvContent));
+        await using MemoryStream stream = new(_encoding.GetBytes(csvContent));
 
         await foreach (CsvMappingResult<TEntity> result in ReadAsync(stream, ct).ConfigureAwait(false))
         {
