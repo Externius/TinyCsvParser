@@ -1,7 +1,8 @@
 ﻿using System;
-using TinyCsvParser.Models;
 
-public ref struct CsvRow
+namespace TinyCsvParser.Models;
+
+public readonly ref struct CsvRow
 {
     private readonly ReadOnlySpan<char> _line;
     private readonly ReadOnlySpan<CsvFieldRange> _ranges;

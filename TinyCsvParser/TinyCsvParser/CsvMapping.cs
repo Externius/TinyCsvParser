@@ -143,7 +143,7 @@ public abstract class CsvMapping<TEntity> : ICsvMapping<TEntity>, IHeaderBinder
 
         public override bool TryMap(ref CsvRow row, TEntity entity, int actualIndex)
         {
-            if (_converter.TryConvert(row.GetSpan(actualIndex), out TProperty? value))
+            if (_converter.TryConvert(row.GetSpan(actualIndex), out TProperty value))
             {
                 _setter(entity, value!);
 
