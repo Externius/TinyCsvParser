@@ -2,7 +2,7 @@
 
 namespace TinyCsvParser.Models;
 
-public ref struct CsvRow
+public readonly ref struct CsvRow
 {
     private readonly ReadOnlySpan<char> _line;
     private readonly ReadOnlySpan<CsvFieldRange> _ranges;
