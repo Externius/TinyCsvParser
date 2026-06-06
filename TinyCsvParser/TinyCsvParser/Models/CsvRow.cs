@@ -1,5 +1,6 @@
 ﻿using System;
-using TinyCsvParser.Models;
+
+namespace TinyCsvParser.Models;
 
 public ref struct CsvRow
 {
