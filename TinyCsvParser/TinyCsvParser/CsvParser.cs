@@ -205,7 +205,7 @@ public class CsvParser<TEntity> where TEntity : class, new()
         {
             initialized = true;
 
-            if (_mapping is IHeaderBinder binder && binder.NeedsHeaderResolution)
+            if (_mapping is IHeaderBinder { NeedsHeaderResolution: true } binder)
             {
                 int count = SplitLine(lineSpan, rangeBuffer, out bool headerOverflow);
 
@@ -262,9 +262,8 @@ public class CsvParser<TEntity> where TEntity : class, new()
         sb.Clear();
         int lines = 0;
         bool inQuotes = false;
-        string? line;
 
-        while ((line = reader.ReadLine()) != null)
+        while (reader.ReadLine() is { } line)
         {
             lines++;
             sb.Append(line);
