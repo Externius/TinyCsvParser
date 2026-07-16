@@ -205,7 +205,7 @@ public class CsvParser<TEntity> where TEntity : class, new()
         {
             initialized = true;
 
-            if (_mapping is IHeaderBinder binder && binder.NeedsHeaderResolution)
+            if (_mapping is IHeaderBinder { NeedsHeaderResolution: true } binder)
             {
                 int count = SplitLine(lineSpan, rangeBuffer, out bool headerOverflow);
 
