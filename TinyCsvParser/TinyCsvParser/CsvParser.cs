@@ -262,9 +262,8 @@ public class CsvParser<TEntity> where TEntity : class, new()
         sb.Clear();
         int lines = 0;
         bool inQuotes = false;
-        string? line;
 
-        while ((line = reader.ReadLine()) != null)
+        while (reader.ReadLine() is { } line)
         {
             lines++;
             sb.Append(line);
