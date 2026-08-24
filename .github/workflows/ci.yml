@@ -20,6 +20,11 @@ jobs:
         id: stepid
         with:
           dotnet-version: ${{ matrix.dotnet }}
+      - name: Replace global.json
+        run: |
+          set -e
+          rm -f TinyCsvParser/global.json
+          printf '%s' '{"sdk":{"version":"${{ steps.stepid.outputs.dotnet-version }}","test":{"runner":"Microsoft.Testing.Platform"}}' > TinyCsvParser/global.json
       - name: Build project
         run: dotnet build TinyCsvParser
       - name: Run unit tests
