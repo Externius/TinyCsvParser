@@ -1,4 +1,4 @@
-name: CI 
+name: CI
 
 on:
   push:
@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet: [ '8.0.x', '10.0.x']
-    name: Run unit tests for Dotnet ${{ matrix.dotnet }}  
+        dotnet: [ '8.0.x', '10.0.x' ]
+    name: Run unit tests for Dotnet ${{ matrix.dotnet }}
     steps:
       - uses: actions/checkout@v7
       - name: Set up .NET
@@ -22,5 +22,6 @@ jobs:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Build project
         run: dotnet build TinyCsvParser
-      - name: Run unit tests 
-        run: dotnet test TinyCsvParser --no-build --no-restore --verbosity normal
+      - name: Run unit tests
+        working-directory: ./TinyCsvParser/TinyCsvParser.Test
+        run: dotnet test --no-build --no-restore --verbosity normal
