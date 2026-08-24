@@ -20,9 +20,6 @@ jobs:
         id: stepid
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - name: Create temporary global.json
-        run: |
-          echo '{"sdk":{"version": "${{ steps.stepid.outputs.dotnet-version }}"}}' > ./TinyCsvParser/global.json
       - name: Build project
         run: dotnet build TinyCsvParser
       - name: Run unit tests 
