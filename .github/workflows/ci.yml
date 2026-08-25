@@ -1,4 +1,4 @@
-name: CI 
+name: CI
 
 on:
   push:
@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet: [ '8.0.x', '10.0.x']
-    name: Run unit tests for Dotnet ${{ matrix.dotnet }}  
+        dotnet: [ '8.0.x', '10.0.x' ]
+    name: Run unit tests for Dotnet ${{ matrix.dotnet }}
     steps:
       - uses: actions/checkout@v7
       - name: Set up .NET
@@ -20,10 +20,13 @@ jobs:
         id: stepid
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - name: Create temporary global.json
+      - name: Replace global.json
         run: |
-          echo '{"sdk":{"version": "${{ steps.stepid.outputs.dotnet-version }}"}}' > ./TinyCsvParser/global.json
+          set -e
+          rm -f TinyCsvParser/global.json
+          printf '%s' '{"sdk":{"version":"${{ steps.stepid.outputs.dotnet-version }}"},"test":{"runner":"Microsoft.Testing.Platform"}}' > TinyCsvParser/global.json
       - name: Build project
         run: dotnet build TinyCsvParser
-      - name: Run unit tests 
-        run: dotnet test TinyCsvParser --no-build --no-restore --verbosity normal
+      - name: Run unit tests
+        working-directory: ./TinyCsvParser/TinyCsvParser.Test
+        run: dotnet test --no-build --no-restore --verbosity normal
