@@ -7,7 +7,7 @@
 TinyCsvParser is a high-performance CSV parsing library for .NET. This documentation explains the usage,
 configuration, and extensibility of the library through practical examples.
 
-> Upgrading from a previous version? Check out the [Migration Guide from 2.x to 3.x](#8-migration-from-2x-to-3x)
+> Upgrading from a previous version? Check out the [Migration Guide from 2.x to 3.x](#9-migration-from-2x-to-3x)
 
 ## Table of Contents ##
 
