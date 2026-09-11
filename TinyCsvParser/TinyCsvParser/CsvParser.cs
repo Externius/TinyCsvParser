@@ -284,7 +284,7 @@ public class CsvParser<TEntity> where TEntity : class, new()
             sb.Append('\n');
         }
 
-        return (sb.Length > 0 ? (sb.ToString(), lines, inQuotes) : (null, 0, false));
+        return sb.Length > 0 ? (sb.ToString(), lines, inQuotes) : (null, 0, false);
     }
 
     private bool TryReadLogicalRecord(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> lineSequence, out int linesConsumed, out bool isMalformed)
